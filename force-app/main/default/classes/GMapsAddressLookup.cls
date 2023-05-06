@@ -31,18 +31,20 @@ public with sharing class GMapsAddressLookup {
         // set the request body
         request.setBody(JSON.serialize(mapsRequest));
         // send the request
-        HttpResponse response = http.send(request);
+        try {
+            HttpResponse response = http.send(request);
 
-        // return the response body and deserialize it
-
-        System.debug(response.getBody());
-
-        Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
-        Map<String, Object> resultMap = (Map<String, Object>) responseMap.get('result');
-        Map<String, Object> addressMap = (Map<String, Object>) resultMap.get('address');
-        String formattedAddress = (String) addressMap.get('formattedAddress');
-
-        return formattedAddress;
+            // return the response body and deserialize it
+            Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+            Map<String, Object> resultMap = (Map<String, Object>) responseMap.get('result');
+            Map<String, Object> addressMap = (Map<String, Object>) resultMap.get('address');
+            String formattedAddress = (String) addressMap.get('formattedAddress');
+    
+            return formattedAddress;
+        } catch (Exception e) {
+            System.debug('Error in lookupAddress method: ' + e.getMessage());
+            return null;
+        }
     }
 
     private class PostalResponse {

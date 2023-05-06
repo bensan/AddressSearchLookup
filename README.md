@@ -1,18 +1,16 @@
 # Address Search Lookup
 
-This is a simple Lightning Web Component that allows you to search for an address and then populate the address fields on a record.
+This is a simple Lightning Web Component that allows you to search for an address and then populate the address fields on a record. It uses the Google Maps Validation API to validate the address that was input by the user. If the address is valid, it will populate the address fields on an Account standard compound address fields.
+
+This component can be useful if the location information is required to be validated by a third party service because your business needs to ship something to the Account location.
 
 ## How Do You Plan to Deploy Your Changes?
 
 This project should only be used as a sample. Make sure you understand how to use this project before deploying it to your org.
 
-## Configure Your Salesforce DX Project
+## ToDos
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+- [ ] Add unit tests
+- [ ] Update Account record the component is associated to with the address information
+- [ ] Add a toast message once the address has been updated to the Account record
+- [ ] Add a toast message if the address is invalid
