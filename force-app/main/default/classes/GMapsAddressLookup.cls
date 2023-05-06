@@ -47,14 +47,6 @@ public with sharing class GMapsAddressLookup {
         }
     }
 
-    private class PostalResponse {
-        public String address1 { get; set; }
-        public String city { get; set; }
-        public String locality { get; set; }
-        public String country { get; set; }
-        public String postalCode { get; set; }
-    }
-
     // Create a wrapper class to hold the address information called PostalCode
     private class PostalAddress {
         public Integer revision { get; set; }
