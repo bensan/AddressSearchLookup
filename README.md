@@ -1,16 +1,33 @@
-# Address Search Lookup
+AddressSearchLookup Lightning Web Component
+The AddressSearchLookup component is a reusable Salesforce Lightning Web Component (LWC) that allows users to search and look up addresses using the Google Places API. It provides a search input field with autocomplete suggestions based on the user's query.
 
-This is a simple Lightning Web Component that allows you to search for an address and then populate the address fields on a record. It uses the Google Maps Validation API to validate the address that was input by the user. If the address is valid, it will populate the address fields on an Account standard compound address fields.
+Features
+Address search input field with autocomplete.
+Utilizes Google Places API for address suggestions.
+Display suggestions in a dropdown list.
+Select address from dropdown list to populate the input field.
+Dependencies
+Google Maps JavaScript API: Must be loaded in your Salesforce org.
+Google Places API: API key is required.
+Installation
+Clone the repository to your local machine.
 
-This component can be useful if the location information is required to be validated by a third party service because your business needs to ship something to the Account location.
+bash
+Copy code
+git clone https://github.com/bensan/AddressSearchLookup.git
+Deploy the components to your Salesforce org using Salesforce CLI or any other preferred deployment method.
 
-## How Do You Plan to Deploy Your Changes?
+Add the AddressSearchLookup component to your Lightning App or Lightning Page by including the custom tag:
 
-This project should only be used as a sample. Make sure you understand how to use this project before deploying it to your org.
+html
+Copy code
+<c-address-search-lookup></c-address-search-lookup>
+Customization
+To customize the component, you can modify the source code of the AddressSearchLookup component. This includes editing the HTML, JavaScript, and CSS files as needed.
 
-## ToDos
-
-- [ ] Add unit tests
-- [ ] Update Account record the component is associated to with the address information
-- [ ] Add a toast message once the address has been updated to the Account record
-- [ ] Add a toast message if the address is invalid
+JavaScript
+addressSearchLookup.js: Contains the main functionality of the component, including initializing the Google Places API, handling user input, and displaying address suggestions.
+HTML
+addressSearchLookup.html: Contains the structure and layout of the component, including the search input field and the dropdown list for address suggestions.
+CSS
+addressSearchLookup.css: Contains the styles for the component, including the appearance of the search input field and the dropdown list for address suggestions.
