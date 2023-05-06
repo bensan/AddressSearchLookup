@@ -1,8 +1,26 @@
 <template>
     <lightning-card title="Address Lookup">
-        <div class="slds-p-around_medium">
-            <lightning-input label="Search Address" name="address" value={address} onchange={handleAddressChange}></lightning-input>
-            <lightning-button label="Search" variant="brand" onclick={handleSearch}></lightning-button>
+        <div class="slds-var-p-around_medium">
+            <lightning-input-address
+            address-label="Address"
+            street-label="Street"
+            city-label="City"
+            country-label="Country"
+            province-label="State"
+            postal-code-label="PostalCode"
+            street=""
+            city="" country="US"
+            province="" postal-code=""
+            required
+            field-level-help="Enter in an address" ></lightning-input-address><br/>
+            <lightning-button label="Search" variant="brand" onclick={handleAddressSearch}></lightning-button>
+            <br/><br />
+            <template if:true={showStandardAddress}>
+                <p slot="footer"><b>Standard Address: </b>{standardAddress}</p>
+            </template>
+            <template if:true={error}>
+                <p>{error}</p>
+            </template>
         </div>
     </lightning-card>
 </template>
