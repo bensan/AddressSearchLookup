@@ -1,10 +1,10 @@
-# Salesforce DX Project: Next Steps
+# Address Search Lookup
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+This is a simple Lightning Web Component that allows you to search for an address and then populate the address fields on a record.
 
 ## How Do You Plan to Deploy Your Changes?
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+This project should only be used as a sample. Make sure you understand how to use this project before deploying it to your org.
 
 ## Configure Your Salesforce DX Project
 
