@@ -13,9 +13,18 @@ public with sharing class GMapsAddressLookup {
         GMapsAddressLookup__c gmaps = GMapsAddressLookup__c.getOrgDefaults();
         apiKey = gmaps.API_Key__c;
         System.debug('apiKey: ' + apiKey);
-
+        // TODO: There should be an error here if there is no API key found
+        
         // create a new PostalCode object, add input address lines to PostalCode instance
-        GMapsAddressLookup.PostalAddress postalCode = new GMapsAddressLookup.PostalAddress(addressLines);
+
+        // public PostalAddress(List<String> addressLines, String regionCode, String locality, String adminArea, String postalCode) {
+        // (7536 Belted Kingfisher Way, Winter Garden, FL, 34787, US)
+        GMapsAddressLookup.PostalAddress postalCode = new GMapsAddressLookup.PostalAddress(addressLines, 
+            'US',
+            addressLines[1], 
+            addressLines[2],
+            addressLines[3]
+        );
         // create a new mapsRequest object, add PostalCode instance to mapsRequest instance
         GMapsAddressLookup.mapsRequest mapsRequest = new GMapsAddressLookup.mapsRequest(postalCode, null, 'true');
 
@@ -80,8 +89,12 @@ public with sharing class GMapsAddressLookup {
         
         // Create a constructor that accepts a List<String> as a parameter
         // and sets the addressLines property
-        public PostalAddress(List<String> addressLines) {
+        public PostalAddress(List<String> addressLines, String regionCode, String locality, String adminArea, String postalCode) {
             this.addressLines = addressLines;
+            this.regionCode = regionCode;
+            this.locality = locality;
+            this.administrativeArea = adminArea;
+            this.postalCode = postalCode;
         }
     }
 
