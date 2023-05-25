@@ -12,6 +12,7 @@ public with sharing class GMapsAddressLookup {
         // get the API key from a custom setting
         GMapsAddressLookup__c gmaps = GMapsAddressLookup__c.getOrgDefaults();
         apiKey = gmaps.API_Key__c;
+        System.debug('apiKey: ' + apiKey);
 
         // create a new PostalCode object, add input address lines to PostalCode instance
         GMapsAddressLookup.PostalAddress postalCode = new GMapsAddressLookup.PostalAddress(addressLines);
