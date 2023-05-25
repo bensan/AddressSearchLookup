@@ -1,7 +1,10 @@
-import { LightningElement, wire } from 'lwc';
+import { LightningElement, wire, api } from 'lwc';
+import { getRecord, updateRecord } from 'lightning/uiRecordApi';
 import lookupAddress from '@salesforce/apex/GMapsAddressLookup.lookupAddress';
 
 export default class AddressSearchLookup extends LightningElement {
+    @api recordId;  // This gets the record ID when the controller is used on a record page
+
     standardAddress = '';
     showStandardAddress = false;
     addressLines = [];
@@ -19,11 +22,18 @@ export default class AddressSearchLookup extends LightningElement {
         if(data){
             this.showStandardAddress = true;
             this.standardAddress = data;
+            // updateRecord here
+            // updateRecordWithApiResponse(data);
             this.error = undefined;
         } else if(error) {
             this.error = error;
             this.standardAddress = undefined;
             this.showStandardAddress = false;
         }
+    }
+
+    updateRecordWithApiResponse(apiResponse) {
+        const fields = [];
+        fields['Id'] = this.recordId;
     }
 }
