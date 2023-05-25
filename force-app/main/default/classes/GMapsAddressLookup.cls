@@ -40,7 +40,23 @@ public with sharing class GMapsAddressLookup {
             Map<String, Object> resultMap = (Map<String, Object>) responseMap.get('result');
             Map<String, Object> addressMap = (Map<String, Object>) resultMap.get('address');
             String formattedAddress = (String) addressMap.get('formattedAddress');
-    
+            Map<String, Object> uspsData = (Map<String, Object>) resultMap.get('uspsData');
+            System.debug(uspsData);
+
+            Map<String, Object> standardizedAddress = (Map<String, Object>) uspsData.get('standardizedAddress');
+            String firstAddressLine = (String) standardizedAddress.get('firstAddressLine'); // street name and number
+            String city = (String) standardizedAddress.get('city'); // city
+            String state = (String) standardizedAddress.get('state'); // state
+            String zipCode = (String) standardizedAddress.get('zipCode'); // street name and number
+            String zipCodeExtension = (String) standardizedAddress.get('zipCodeExtension'); // street name and number
+            String country = 'US'; // street name and number
+            System.debug('first address line: ' + firstAddressLine);
+            System.debug('first address line: ' + city);
+            System.debug('first address line: ' + state);
+            System.debug('first address line: ' + zipCode);
+            System.debug('first address line: ' + zipCodeExtension);
+            System.debug('first address line: ' + country);
+
             return formattedAddress;
         } catch (Exception e) {
             System.debug('Error in lookupAddress method: ' + e.getMessage());

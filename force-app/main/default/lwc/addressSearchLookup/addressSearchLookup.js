@@ -1,7 +1,8 @@
 import { LightningElement, wire, api } from 'lwc';
-import { getRecord, updateRecord } from 'lightning/uiRecordApi';
+import { updateRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import lookupAddress from '@salesforce/apex/GMapsAddressLookup.lookupAddress';
+
 
 export default class AddressSearchLookup extends LightningElement {
     @api recordId;  // This gets the record ID when the controller is used on a record page
@@ -23,8 +24,7 @@ export default class AddressSearchLookup extends LightningElement {
         if(data){
             this.showStandardAddress = true;
             this.standardAddress = data;
-            console.log(this.recordId);
-            updateRecordWithApiResponse(data);
+            this.updateRecordWithApiResponse(data);
             this.error = undefined;
         } else if(error) {
             this.error = error;
@@ -34,28 +34,28 @@ export default class AddressSearchLookup extends LightningElement {
     }
 
     updateRecordWithApiResponse(apiResponse) {
-        const fields = [];
+        const fields = {};
+
         fields['Id'] = this.recordId;
-        console.log('apiResponse', apiResponse);
+        fields['Shipping_Address__c'] = '456 Main St';
+        fields['Shipping_City__c'] = 'San Francisco';
+        fields['Shipping_State__c'] = 'CA';
+        fields['Shipping_Postal_Code__c'] = '94105';
+        fields['Shipping_Country__c'] = 'US';
 
-        fields['Shipping_Address__c'] = apiResponse.street;
-        fields['Shipping_City__c'] = apiResponse.city;
-        fields['Shipping_State__c'] = apiResponse.province;
-        fields['Shipping_PostalCode__c'] = apiResponse.postalCode;
-
-        const recordInput = { fields };
-
+        const recordInput = { fields: fields };
         updateRecord(recordInput)
-            .then(() => {
+            .then((record) => {
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Success',
-                        message: 'Address updated',
+                        message: 'Shipping Location Updated Successfully for ' + record.fields.Name.value,
                         variant: 'success'
                     })
                 );
             })
             .catch(error => {
+                console.log('error', error);
                 this.dispatchEvent(
                     new ShowToastEvent({
                         title: 'Error updating record',
