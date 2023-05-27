@@ -8,7 +8,7 @@ public with sharing class GMapsAddressLookup {
     // write a utility class that sends out an HTTP request
     // to the Google Maps API and returns the results
     @AuraEnabled(cacheable=true)
-    public static String lookupAddress(List<String> addressLines) {
+    public static GMapsResponseWrapper lookupAddress(List<String> addressLines) {
         // get the API key from a custom setting
         GMapsAddressLookup__c gmaps = GMapsAddressLookup__c.getOrgDefaults();
         apiKey = gmaps.API_Key__c;
@@ -59,14 +59,10 @@ public with sharing class GMapsAddressLookup {
             String zipCode = (String) standardizedAddress.get('zipCode'); // street name and number
             String zipCodeExtension = (String) standardizedAddress.get('zipCodeExtension'); // street name and number
             String country = 'US'; // street name and number
-            System.debug('first address line: ' + firstAddressLine);
-            System.debug('first address line: ' + city);
-            System.debug('first address line: ' + state);
-            System.debug('first address line: ' + zipCode);
-            System.debug('first address line: ' + zipCodeExtension);
-            System.debug('first address line: ' + country);
 
-            return formattedAddress;
+            GMapsResponseWrapper responseWrapper = new GMapsResponseWrapper(firstAddressLine, city, state, 
+                zipCode, zipCodeExtension, country);
+            return responseWrapper;
         } catch (Exception e) {
             System.debug('Error in lookupAddress method: ' + e.getMessage());
             return null;

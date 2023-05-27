@@ -22,6 +22,7 @@ export default class AddressSearchLookup extends LightningElement {
     @wire(lookupAddress, {addressLines: '$addressLines'})
     wiredAddress({error, data}) {
         if(data){
+            console.log('data', data.firstAddressLine);
             this.showStandardAddress = true;
             this.standardAddress = data;
             this.updateRecordWithApiResponse(data);
@@ -37,10 +38,10 @@ export default class AddressSearchLookup extends LightningElement {
         const fields = {};
 
         fields['Id'] = this.recordId;
-        fields['Shipping_Address__c'] = '456 Main St';
-        fields['Shipping_City__c'] = 'San Francisco';
-        fields['Shipping_State__c'] = 'CA';
-        fields['Shipping_Postal_Code__c'] = '94105';
+        fields['Shipping_Address__c'] = apiResponse.firstAddressLine;
+        fields['Shipping_City__c'] = apiResponse.city;
+        fields['Shipping_State__c'] = apiResponse.state;
+        fields['Shipping_Postal_Code__c'] = apiResponse.zip + '-' + apiResponse.zipCodeExtension;
         fields['Shipping_Country__c'] = 'US';
 
         const recordInput = { fields: fields };
