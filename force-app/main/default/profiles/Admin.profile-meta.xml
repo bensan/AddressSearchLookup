@@ -4,7 +4,16 @@
         <apexClass>GMapsAddressLookup</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>GMapsResponseWrapper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <custom>false</custom>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shipping_Location__c.Account__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Shipping_Location__c.Shipping_Address__c</field>
@@ -18,6 +27,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Shipping_Location__c.Shipping_Country__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Shipping_Location__c.Shipping_Postal_Code__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
